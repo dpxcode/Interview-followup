@@ -276,11 +276,11 @@ async function processFollowUpEmails() {
     
     const updatedContacts = [];
     let emailsSent = 0;
+    const now = new Date();
     
     for (const contact of hrList) {
         if (!contact.email) continue;
         
-        const now = new Date();
         const lastSentDate = contact.lastSentDate ? new Date(contact.lastSentDate) : null;
         const daysSinceLastSent = lastSentDate ? Math.floor((now - lastSentDate) / (1000 * 60 * 60 * 24)) : null;
         
@@ -296,10 +296,6 @@ async function processFollowUpEmails() {
             // Time for a resume follow-up
             shouldSend = true;
             includeResume = true;
-        } else if (daysSinceLastSent >= 2) {
-            // Time for a regular follow-up
-            shouldSend = true;
-            includeResume = false;
         }
         
         if (shouldSend) {
@@ -309,6 +305,8 @@ async function processFollowUpEmails() {
                 // Update the last sent date
                 contact.lastSentDate = now.toISOString();
             }
+        } else if (lastSentDate) {
+            console.log(`Skipping ${contact.email} - Last email was sent ${daysSinceLastSent} days ago`);
         }
         
         updatedContacts.push(contact);
@@ -322,7 +320,7 @@ async function processFollowUpEmails() {
         updateExcelFile('hr_contacts.xlsx', updatedContacts);
         console.log(`Updated Excel file with new last sent dates. Sent ${emailsSent} follow-up emails.`);
     } else {
-        console.log('No follow-up emails needed at this time.');
+        console.log('No follow-up emails needed - all contacts have been emailed within the last 7 days.');
     }
 }
 
@@ -339,18 +337,25 @@ async function processEmails() {
     
     const updatedContacts = [];
     let emailsSent = 0;
+    const now = new Date();
     
     for (const contact of hrList) {
         if (!contact.email) continue;
         
-        // Only send initial email if no last sent date exists
-        if (!contact.lastSentDate) {
+        // Check if 7 days have passed since last email
+        const lastSentDate = contact.lastSentDate ? new Date(contact.lastSentDate) : null;
+        const daysSinceLastSent = lastSentDate ? Math.floor((now - lastSentDate) / (1000 * 60 * 60 * 24)) : null;
+        
+        // Only send if no previous email or 7 days have passed
+        if (!lastSentDate || (daysSinceLastSent && daysSinceLastSent >= 7)) {
             const success = await sendEmail(contact);
             if (success) {
                 emailsSent++;
                 // Set the initial last sent date
-                contact.lastSentDate = new Date().toISOString();
+                contact.lastSentDate = now.toISOString();
             }
+        } else {
+            console.log(`Skipping ${contact.email} - Last email was sent ${daysSinceLastSent} days ago`);
         }
         
         updatedContacts.push(contact);
@@ -364,7 +369,7 @@ async function processEmails() {
         updateExcelFile('hr_contacts.xlsx', updatedContacts);
         console.log(`Updated Excel file with new last sent dates. Sent ${emailsSent} initial emails.`);
     } else {
-        console.log('No initial emails needed - all contacts have been emailed before.');
+        console.log('No initial emails needed - all contacts have been emailed within the last 7 days.');
     }
 }
 
