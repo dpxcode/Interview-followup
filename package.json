@@ -1,0 +1,16 @@
+{
+  "name": "resume-sent-bot",
+  "version": "1.0.0",
+  "description": "Automated email sender for job applications",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "create-excel": "node create_excel.js",
+    "create-followup": "node create_followup_excel.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "nodemailer": "^6.9.1",
+    "xlsx": "^0.18.5"
+  }
+} 
