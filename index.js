@@ -124,7 +124,7 @@ async function sendEmail(recipient) {
     const mailOptions = {
         from: process.env.EMAIL_USER,
         to: recipient.email,
-        subject: 'Application for Full Stack Developer (Node.js, React.js, Python) - Durga Parshad',
+        subject: 'Application for Full Stack Developer (Node.js, React.js, Python, Java Spring Boot) - Durga Parshad',
         html: `
             <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
                 <p>Dear ${recipient.name || 'HR Professional'},</p>
@@ -161,7 +161,7 @@ async function sendEmail(recipient) {
                     </li>
                 </ul>
                 
-                <p>I am particularly drawn to ${recipient.company || 'your company'} because of your commitment to innovation and your reputation in the industry. I am confident that my technical skills, cloud expertise, and experience with cutting-edge technologies align perfectly with your team's needs.</p>
+                <p>I am particularly drawn to ${recipient.company || 'your organization'}'s innovative approach and would be excited to contribute my skills to your team. I am an immediate joiner and can start after April 30th, 2024. For foreign opportunities, I would like to mention that all my qualifications and experience documents are already attested by MEA (Ministry of External Affairs).</p>
                 
                 <p>I have attached my resume for your review. I would welcome the opportunity to discuss how my skills and experience could contribute to your team's success. I am available for an interview at your convenience.</p>
                 
@@ -221,7 +221,7 @@ async function sendFollowUpEmail(recipient, includeResume) {
         from: process.env.EMAIL_USER,
         to: recipient.email,
         subject: includeResume 
-            ? 'Follow-up with Resume: Application for Full Stack Developer (Node.js, React.js, Python) - Durga Parshad'
+            ? 'Follow-up with Resume: Application for Full Stack Developer (Node.js, React.js, Python, Java Spring Boot) - Durga Parshad'
             : 'Follow-up: Application for Full Stack Developer (Node.js, React.js, Python) - Durga Parshad',
         html: `
             <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
@@ -231,7 +231,7 @@ async function sendFollowUpEmail(recipient, includeResume) {
                 
                 <p>I am still very interested in the position and would appreciate any feedback you could provide regarding my application. If there are any additional materials or information you need from me, please let me know.</p>
                 
-                <p>I understand that the hiring process can take time, and I appreciate your consideration of my application. I would welcome the opportunity to discuss how my skills in Node.js, React.js, Python, and my willingness to learn Java Spring Boot could benefit your team.</p>
+                <p>I understand that the hiring process can take time, and I appreciate your consideration of my application. I would welcome the opportunity to discuss how my skills in Node.js, React.js, Python, and my willingness to learn Java Spring Boot could benefit your team. I am an immediate joiner and can start after April 30th, 2024. For foreign opportunities, I would like to mention that all my qualifications and experience documents are already attested by MEA (Ministry of External Affairs).</p>
                 
                 ${includeResume ? '<p>I have attached my resume again for your convenience.</p>' : ''}
                 
@@ -422,14 +422,14 @@ async function sendNoResponseFollowUp(recipient) {
     const mailOptions = {
         from: process.env.EMAIL_USER,
         to: recipient.email,
-        subject: 'Following Up: Application for Full Stack Developer (Node.js, React.js, Python) - Durga Parshad',
+        subject: 'Following Up: Application for Full Stack Developer (Node.js, React.js, Python, Java Spring Boot) - Durga Parshad',
         html: `
             <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
                 <p>Dear ${recipient.name || 'HR Professional'},</p>
                 
                 <p>I hope this email finds you well. I recently submitted my application for the Full Stack Developer position at ${recipient.company || 'your organization'} and I wanted to follow up as I haven't received a response yet.</p>
                 
-                <p>I understand that you may be reviewing many applications, and I wanted to reiterate my strong interest in the position. As a Full Stack Developer with expertise in Node.js, React.js, and Python, I believe I would be a valuable addition to your team. I am also eager to learn Java Spring Boot to contribute to your enterprise applications.</p>
+                <p>I understand that you may be reviewing many applications, and I wanted to reiterate my strong interest in the position. As a Full Stack Developer with expertise in Node.js, React.js, and Python, I believe I would be a valuable addition to your team. I am also eager to learn Java Spring Boot to contribute to your enterprise applications. I am an immediate joiner and can start after April 30th, 2024. For foreign opportunities, I would like to mention that all my qualifications and experience documents are already attested by MEA (Ministry of External Affairs).</p>
                 
                 <p>I would greatly appreciate any feedback regarding my application or information about the next steps in your hiring process. I have attached my resume again for your convenience.</p>
                 
